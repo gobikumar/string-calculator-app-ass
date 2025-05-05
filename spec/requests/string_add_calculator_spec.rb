@@ -25,5 +25,20 @@ RSpec.describe StringAddCalculatorController, type: :controller do
         expect(response).to have_http_status(:ok)
       end
     end
+
+    context 'with negative numbers' do
+      it 'renders error message in html' do
+        post :calculate, params: { input: '1,-2,3' }
+        expect(response).to render_template(:add)
+      end
+
+      it 'renders error message in json' do
+        post :calculate, params: { input: '1,-2,3,-4' }, format: :json
+        json = JSON.parse(response.body)
+        expect(json['errors']).to eq("Negative numbers not allowed: -2,-4")
+        expect(json['result']).to eq(nil)
+      end
+    end
+
   end
 end
