@@ -1,0 +1,23 @@
+<%= debug result %>
+<%= debug errors %>
+
+<h1>String Calculator</h1>
+
+<%= form_with url: calculate_path, method: :post, local: true, class: "string-calculator-form" do |form| %>
+  <div class="form-group">
+    <%= form.label :input, "Enter numbers (e.g. 1,2,3):" %>
+    <%= form.text_field :input, value: input, class: "form-control", placeholder: "e.g. 1,2,3 or //;\n1;2" %>
+  </div>
+
+  <div class="form-actions">
+    <%= form.submit "Calculate", class: "btn btn-primary" %>
+  </div>
+<% end %>
+
+  <div class="result-section">
+    <% if errors.present? %>
+      <p class="error text-danger"><strong>Error:</strong> <%= errors %></p>
+    <% else %>
+      <p class="result text-success"><strong>Result:</strong> <%= result %></p>
+    <% end %>
+  </div>
