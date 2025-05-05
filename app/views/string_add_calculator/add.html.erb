@@ -1,6 +1,3 @@
-<%= debug result %>
-<%= debug errors %>
-
 <h1>String Calculator</h1>
 
 <%= form_with url: calculate_path, method: :post, local: true, class: "string-calculator-form" do |form| %>
@@ -13,6 +10,7 @@
     <%= form.submit "Calculate", class: "btn btn-primary" %>
   </div>
 <% end %>
+<% if result.present? || errors.present? %>
 
   <div class="result-section">
     <% if errors.present? %>
@@ -21,3 +19,4 @@
       <p class="result text-success"><strong>Result:</strong> <%= result %></p>
     <% end %>
   </div>
+<% end %>

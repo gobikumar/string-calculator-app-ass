@@ -7,17 +7,9 @@ class StringAddCalculatorController < ApplicationController
         
         input = params[:input].to_s
         result_data = StringAddCalculator.new(numbers: input).execute
-        format.json { render json: result_data.merge(input:) }
-aA
         respond_to do |format|
-            
-          format.html do
-            render :add, locals: {
-                errors: service[:errors],
-                result: service[:result],
-                input: input
-              }
-            end      
+          format.html { render :add, locals: { errors: result_data[:errors], result: result_data[:result], input: input } }
+          format.json { render json: { errors: result_data[:errors], result: result_data[:result], input: input } }
         end
     end
     
